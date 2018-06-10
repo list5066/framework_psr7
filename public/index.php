@@ -1,4 +1,6 @@
 <?php
+// some comment here, and link to memorize url of lessons https://youtu.be/w4iqxN0nfTs
+// Eliseev Dmitrii lesson about psr7 framework making
 
 function getLang($default)
 {
