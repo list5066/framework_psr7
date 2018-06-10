@@ -7,12 +7,12 @@
  * @param $default
  * @return bool|string
  */
-function getLang(array $request, $default)
+function getLang(Request $request, $default)
 {
-	$get = $request['get'];
-	$cookie = $request['cookie'];
-	$session = $request['session'];
-	$server = $request['server'];
+	$get = $request->getQueryParams();
+	$cookie = $request->getCookies();
+	$session = $request->getSession();
+	$server = $request->getServer();
 
 	return
 		!empty($get['lang']) ? $get['lang'] :
@@ -24,12 +24,30 @@ function getLang(array $request, $default)
 
 session_start();
 
-$request = [
-	'get' => $_GET,
-	'cookie' => $_COOKIE,
-	'session' => $_SESSION,
-	'server' => $_SERVER,
-];
+class Request
+{
+	public function getQueryParams(): array
+	{
+		return $_GET;
+	}
+	
+	public function getCookies(): array
+	{
+		return $_COOKIE;
+	}
+	
+	public function getSession(): array
+	{
+		return $_SESSION;
+	}
+	
+	public function getServer(): array
+	{
+		return $_SERVER;
+	}
+}
+
+$request = new Request();
 
 $name = $_GET['name'] ?? 'Guest';
 $lang = getLang($request, 'en');
