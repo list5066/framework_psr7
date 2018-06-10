@@ -1,0 +1,7 @@
+{
+	"config": {
+	  "sort-packages": true
+	},
+	  "php": ">=7.1.0"
+	}
+}
